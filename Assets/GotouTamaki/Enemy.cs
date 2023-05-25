@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     protected int _hp = 10;
     [SerializeField]
-    protected float _dir = -1f;
+    float _dir = -1f;
     [SerializeField]
     protected float _vertSpeed = 1f;
     [SerializeField]
@@ -44,6 +44,8 @@ public class Enemy : MonoBehaviour
 
         if (_isInsideCamera)
         {
+            _startTime += Time.deltaTime;
+
             if(_moveType == MoveType.VerticalMove)
             {
                 VerticalMove();
@@ -54,13 +56,9 @@ public class Enemy : MonoBehaviour
             }
             else if (_moveType == MoveType.SinCurveMove)
             {
-                SinCurveMove(Time.time);
+                SinCurveMove(Time.deltaTime);
             }
-        }
-        else 
-        {
-            _startTime += Time.deltaTime;
-        }
+        } 
     }
 
     IEnumerator Shoot()
@@ -82,7 +80,7 @@ public class Enemy : MonoBehaviour
 
     void VerticalMove()
     {
-        this.transform.position += new Vector3(transform.position.x,_dir * _vertSpeed, 0);
+        this.transform.position += new Vector3(0,_dir * _vertSpeed, 0);
     }
 
     void HorizontalMove() 
@@ -92,9 +90,9 @@ public class Enemy : MonoBehaviour
 
     void SinCurveMove(float time) 
     {
-        _x = Mathf.Sin((time - _startTime) * _horiSpeed) + _originalX;
+        _x = Mathf.Sin(_startTime * _horiSpeed) + _originalX;
         Debug.Log(_x);
-        this.transform.position = new Vector3(_x, transform.position.y,0);
+        this.transform.position = new Vector3(_x,transform.position.y, 0);
         VerticalMove();
     }
 
