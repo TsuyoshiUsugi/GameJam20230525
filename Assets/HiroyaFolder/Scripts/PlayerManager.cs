@@ -15,8 +15,7 @@ public class PlayerManager : MonoBehaviour
     Text _timeText = default;
     [SerializeField]
     Text _scoreText = default;
-    private float _moveSpeed = 5f;
-
+    private float _moveSpeed = 8f;
     private int _playerHP = 100;
 
     private Rigidbody2D _rb2D;
@@ -34,7 +33,7 @@ public class PlayerManager : MonoBehaviour
         _elaptime += Time.deltaTime;
         _timeText.text = $"{((int)_elaptime / 60).ToString("00")}:{((_elaptime % 60).ToString("00.00"))}";
         _scoreText.text = $"Score: {SCORE_MANAGER.Score.ToString()}";
-        _playerHP_Text.text = $"PlayerHP: {_playerHP}";
+        _playerHP_Text.text = $"HP: {_playerHP}";
         //ˆÚ“®§ŒÀ
         Vector2 _position_Limit = Camera.main.ViewportToWorldPoint(Vector2.one);
         _position_Limit -= new Vector2(0.5f, 0.5f);
@@ -80,6 +79,16 @@ public class PlayerManager : MonoBehaviour
         {
             SCORE_MANAGER.AddScore(10);
         }
+        if (other.gameObject.tag == "RepairItem")
+        {
+            DamagetoPlayer(-20);
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "ScoreItem")
+        {
+            SCORE_MANAGER.AddScore(100);
+            Destroy(other.gameObject);
+        }
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -97,5 +106,9 @@ public class PlayerManager : MonoBehaviour
     public void DamagetoPlayer(int damege)
     {
         _playerHP -= damege;
+        if( _playerHP > 100)
+        {
+            _playerHP = 100;
+        }
     }
 }
