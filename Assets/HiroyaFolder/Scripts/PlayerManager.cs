@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     Text _timeText = default;
     [SerializeField]
     Text _scoreText = default;
-    private float _horizonal_MoveSpeed = 10f;
+    private float _moveSpeed = 5f;
 
     private int _playerHP = 100;
 
@@ -50,40 +50,44 @@ public class PlayerManager : MonoBehaviour
         }
         //’e‚Ì”­ŽËŠÔŠu
         _bullet_Time += Time.deltaTime;
-        if (Input.GetKey(KeyCode.B) && _bullet_Time > 0.2f)
+        if (Input.GetKey(KeyCode.Space) && _bullet_Time > 0.2f)
         {
             _bullet_Time = 0f;
             Instantiate(_player_Bullet, transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
         }
         //transform.position = _camera.transform.position;
-        if (Input.GetKey(KeyCode.W))
-        {
-            _rb2D.AddForce(Vector2.up * _horizonal_MoveSpeed);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            _rb2D.AddForce(Vector2.down * _horizonal_MoveSpeed);
-        }
         if (Input.GetKey(KeyCode.A))
         {
-            _rb2D.AddForce(Vector2.left * _horizonal_MoveSpeed);
+            _rb2D.velocity =new Vector2(-_moveSpeed,_rb2D.velocity.y);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            _rb2D.AddForce(Vector2.right * _horizonal_MoveSpeed);
+            _rb2D.velocity = new Vector2(_moveSpeed, _rb2D.velocity.y);
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            _rb2D.velocity = new Vector2( _rb2D.velocity.x, _moveSpeed);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            _rb2D.velocity = new Vector2(_rb2D.velocity.x, -_moveSpeed);
         }
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "EnemyBullet")
+        if (other.gameObject.tag == "EnemyBullet")
         {
-            DamagetoPlayer(10);
-            Destroy(other.gameObject);
+            SCORE_MANAGER.AddScore(10);
         }
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == "EnemyBullet")
+        {
+            DamagetoPlayer(10);
+            Destroy(collision.gameObject);
+        }
         if (collision.gameObject.tag == "Enemy")
         {
             DamagetoPlayer(50);
