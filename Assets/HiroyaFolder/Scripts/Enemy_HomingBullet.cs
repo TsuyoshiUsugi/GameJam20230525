@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Bullet_Manager : MonoBehaviour
+public class Enemy_HomingBullet : MonoBehaviour
 {
     float _speed = 10f;
     float _lifeTime = 5f;

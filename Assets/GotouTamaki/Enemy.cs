@@ -6,20 +6,22 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    int _hp = 10;
+    protected int _hp = 10;
     [SerializeField]
     float _dir = -1f;
     [SerializeField]
-    float _vertSpeed = 1f;
+    protected float _vertSpeed = 1f;
     [SerializeField]
-    float _horiSpeed = 1f;
+    protected float _horiSpeed = 1f;
     [SerializeField]
-    GameObject _bullet = default;
+    protected GameObject _bullet = default;
     [SerializeField]
     MoveType _moveType;
 
-    bool _isInsideCamera = true;
+    protected bool _isInsideCamera = false;
     float _x = 0;
+    float _startTime = 0;
+    float _originalX = 0;
 
     enum MoveType 
     {
@@ -31,14 +33,19 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _originalX = transform.position.x;
         StartCoroutine(Shoot());
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void FixedUpdate()
     {
+        InsideCamera();
+
         if (_isInsideCamera)
         {
+            _startTime += Time.deltaTime;
+
             if(_moveType == MoveType.VerticalMove)
             {
                 VerticalMove();
@@ -49,9 +56,9 @@ public class Enemy : MonoBehaviour
             }
             else if (_moveType == MoveType.SinCurveMove)
             {
-                SinCurveMove(Time.time);
+                SinCurveMove(Time.deltaTime);
             }
-        }
+        } 
     }
 
     IEnumerator Shoot()
@@ -73,7 +80,7 @@ public class Enemy : MonoBehaviour
 
     void VerticalMove()
     {
-        this.transform.position += new Vector3(transform.position.x,_dir * _vertSpeed, 0);
+        this.transform.position += new Vector3(0,_dir * _vertSpeed, 0);
     }
 
     void HorizontalMove() 
@@ -83,22 +90,20 @@ public class Enemy : MonoBehaviour
 
     void SinCurveMove(float time) 
     {
-        _x = Mathf.Sin(time);
+        _x = Mathf.Sin(_startTime * _horiSpeed) + _originalX;
         Debug.Log(_x);
-        this.transform.position = new Vector3(_x * _horiSpeed, transform.position.y,0);
+        this.transform.position = new Vector3(_x,transform.position.y, 0);
         VerticalMove();
     }
 
-    void OnBecameInvisible()
+    protected void InsideCamera()
     {
-        _isInsideCamera = false;
-        Debug.Log("Œ©‚¦‚Ä‚¢‚È‚¢");
-    }
-
-    void OnBecameVisible()
-    {
-        _isInsideCamera = true;
-        Debug.Log("Œ©‚¦‚Ä‚é");
+        float y = Camera.main.ViewportToWorldPoint(Vector2.one).y;
+        if (y > transform.position.y) 
+        {
+            _isInsideCamera = true;
+        }
+        
     }
 }
 
