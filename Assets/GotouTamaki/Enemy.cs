@@ -10,11 +10,23 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     float _dir = -1f;
     [SerializeField]
-    float _speed = 1f;
+    float _vertSpeed = 1f;
+    [SerializeField]
+    float _horiSpeed = 1f;
     [SerializeField]
     GameObject _bullet = default;
+    [SerializeField]
+    MoveType _moveType;
 
-    bool _isInsideCamera = false;
+    bool _isInsideCamera = true;
+    float _x = 0;
+
+    enum MoveType 
+    {
+        VerticalMove,
+        HorizontalMove,
+        SinCurveMove,
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +39,18 @@ public class Enemy : MonoBehaviour
     {
         if (_isInsideCamera)
         {
-            Move();
+            if(_moveType == MoveType.VerticalMove)
+            {
+                VerticalMove();
+            }
+            else if (_moveType == MoveType.HorizontalMove)
+            {
+                HorizontalMove();
+            }
+            else if (_moveType == MoveType.SinCurveMove)
+            {
+                SinCurveMove(Time.time);
+            }
         }
     }
 
@@ -48,19 +71,34 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Move()
+    void VerticalMove()
     {
-        this.transform.position = new Vector3(0,_dir * _speed,0);
+        this.transform.position += new Vector3(transform.position.x,_dir * _vertSpeed, 0);
+    }
+
+    void HorizontalMove() 
+    {
+        this.transform.position += new Vector3(_dir * _horiSpeed, 0, 0);
+    }
+
+    void SinCurveMove(float time) 
+    {
+        _x = Mathf.Sin(time);
+        Debug.Log(_x);
+        this.transform.position = new Vector3(_x * _horiSpeed, transform.position.y,0);
+        VerticalMove();
     }
 
     void OnBecameInvisible()
     {
         _isInsideCamera = false;
+        Debug.Log("Œ©‚¦‚Ä‚¢‚È‚¢");
     }
 
     void OnBecameVisible()
     {
         _isInsideCamera = true;
+        Debug.Log("Œ©‚¦‚Ä‚é");
     }
 }
 
