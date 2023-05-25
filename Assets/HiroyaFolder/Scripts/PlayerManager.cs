@@ -11,6 +11,10 @@ public class PlayerManager : MonoBehaviour
     GameObject _player_Bullet = default;
     [SerializeField]
     Text _playerHP_Text = default;
+    [SerializeField]
+    Text _timeText = default;
+    [SerializeField]
+    Text _scoreText = default;
     private float _horizonal_MoveSpeed = 10f;
 
     private int _playerHP = 100;
@@ -23,9 +27,14 @@ public class PlayerManager : MonoBehaviour
     }
 
     float _bullet_Time = 0f;
-    float _field_xLimit = 5.5f;
+    float _elaptime = 0f;
     void Update()
     {
+        //UIï\é¶
+        _elaptime += Time.deltaTime;
+        _timeText.text = $"{((int)_elaptime / 60).ToString("00")}:{((_elaptime % 60).ToString("00.00"))}";
+        _scoreText.text = $"Score: {SCORE_MANAGER.Score.ToString()}";
+        _playerHP_Text.text = $"PlayerHP: {_playerHP}";
         //à⁄ìÆêßå¿
         Vector2 _position_Limit = Camera.main.ViewportToWorldPoint(Vector2.one);
         _position_Limit -= new Vector2(0.5f, 0.5f);
@@ -34,14 +43,14 @@ public class PlayerManager : MonoBehaviour
         currentPos.y = Mathf.Clamp(currentPos.y, -_position_Limit.y, _position_Limit.y);
         transform.position = currentPos;
 
-        _playerHP_Text.text = $"PlayerHP: {_playerHP}";
+        
         if (_playerHP <= 0)
         {
             Destroy(gameObject);
         }
-
+        //íeÇÃî≠éÀä‘äu
         _bullet_Time += Time.deltaTime;
-        if (Input.GetKey(KeyCode.B) && _bullet_Time > 0.1f)
+        if (Input.GetKey(KeyCode.B) && _bullet_Time > 0.2f)
         {
             _bullet_Time = 0f;
             Instantiate(_player_Bullet, transform.position + new Vector3(0, 1f, 0), Quaternion.identity);

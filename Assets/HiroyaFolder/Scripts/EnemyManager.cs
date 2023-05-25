@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -8,7 +9,8 @@ public class EnemyManager : MonoBehaviour
     GameObject _enemy_Bullet;
     [SerializeField]
     float _enemyHP = 100;
-
+    [SerializeField]
+    int _enemyScore = 100;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,7 @@ public class EnemyManager : MonoBehaviour
 
          if (_enemyHP <= 0)
         {
+            SCORE_MANAGER.AddScore(_enemyScore);
             Destroy(gameObject);
         }
 
