@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Rendering.HybridV2;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     //[SerializeField]
     //GameObject _camera;
     [SerializeField]
     GameObject _player_Bullet = default;
-
-
+    [SerializeField]
+    Text _playerHP_Text = default;
     private float _horizonal_MoveSpeed = 10f;
 
-    public int Player_HP = 100;
+    private int _playerHP = 100;
 
     private Rigidbody2D _rb2D;
     // Start is called before the first frame update
@@ -26,6 +26,12 @@ public class PlayerManager : MonoBehaviour
     float _bullet_Time = 0f;
     void Update()
     {
+        _playerHP_Text.text = $"PlayerHP: {_playerHP}";
+        if (_playerHP <= 0)
+        {
+            Destroy(gameObject);
+        }
+
         _bullet_Time += Time.deltaTime;
         if (Input.GetKey(KeyCode.B) && _bullet_Time > 0.1f)
         {
@@ -51,11 +57,24 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        if(collision != null)
+        if(other.gameObject.tag == "EnemyBullet")
         {
-
+            DamagetoPlayer(10);
+            Destroy(other.gameObject);
         }
+    }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            DamagetoPlayer(50);
+        }
+    }
+
+    public void DamagetoPlayer(int damege)
+    {
+        _playerHP -= damege;
     }
 }
