@@ -9,8 +9,7 @@ public class EnemyManager : MonoBehaviour
         Enemy,
         Boss,
     }
-    [SerializeField]
-    GameObject _bossHPUI;
+
     [SerializeField]
     GameObject _enemy_Bullet;
     [SerializeField]
@@ -27,26 +26,33 @@ public class EnemyManager : MonoBehaviour
     int _scoreItemCount = 3;
     [SerializeField]
     int _repairItemCount = 3;
-
+    [SerializeField]
+    GameObject _bossHPUI;
     Image _bossHPImage = null;
+    Boss _boss = null;
     int _enemyHP;
     // Start is called before the first frame update
     void Start()
     {
         _bossHPImage = _bossHPUI.GetComponent<Image>();
         _enemyHP = _enemyMAXHP;
-        if (_enemyType == EnemyType.Boss)
-        {
-            _bossHPUI.SetActive(true);
-        }
+
             
     }
     float _bullet_Time = 0f;
 
     void Update()
     {
+        if (_enemyType == EnemyType.Boss)
+        {
+            _boss = GetComponent<Boss>();
+            if (_boss.InsideCamera())
+            {
+                _bossHPUI.SetActive(true);
+            }
 
-         if (_enemyHP <= 0)
+        }
+        if (_enemyHP <= 0)
         {
            DropItems(_score_Item, _scoreItemCount);
            DropItems  (_repair_Item, _repairItemCount);
@@ -73,6 +79,7 @@ public class EnemyManager : MonoBehaviour
         }
 
     }
+
     public void BossShot(GameObject gameObject)
     {
         for (float i = 0; i < 360; i += 6f)
@@ -91,7 +98,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (other.gameObject.tag == "PlayerBullet")
         {
-            DamagetoEnemy(10);
+            DamagetoEnemy(15);
             Destroy(other.gameObject);
         }
     }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FieldManager : MonoBehaviour
 {
+    [SerializeField]
+    float _fieldSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,10 @@ public class FieldManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position -= new Vector3(0, 0.005f, 0);
+        if(transform.position.y > 74f)
+        {
+            transform.position -= new Vector3(0, _fieldSpeed, 0);
+        }
+        
     }
 }

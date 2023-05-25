@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField]
-    protected int _hp = 10;
+    //[SerializeField]
+    //protected int _hp = 10;
     [SerializeField]
     float _dir = -1f;
     [SerializeField]
     protected float _vertSpeed = 1f;
     [SerializeField]
     protected float _horiSpeed = 1f;
-    [SerializeField]
-    protected GameObject _bullet = default;
+    //[SerializeField]
+    //protected GameObject _bullet = default;
     [SerializeField]
     MoveType _moveType;
 
@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     float _startTime = 0;
     float _originalX = 0;
 
+    EnemyManager _enemyManager;
     enum MoveType 
     {
         VerticalMove,
@@ -34,16 +35,16 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _originalX = transform.position.x;
-        StartCoroutine(Shoot());
+        _enemyManager = GetComponent<EnemyManager>();
+        //StartCoroutine(Shoot());
     }
 
     // Update is called once per frame
     protected virtual void FixedUpdate()
-    {
-        InsideCamera();
-
-        if (_isInsideCamera)
+    {      
+        if (InsideCamera())
         {
+            _enemyManager.enabled = true;
             _startTime += Time.deltaTime;
 
             if(_moveType == MoveType.VerticalMove)
@@ -56,27 +57,31 @@ public class Enemy : MonoBehaviour
             }
             else if (_moveType == MoveType.SinCurveMove)
             {
-                SinCurveMove(Time.deltaTime);
+                SinCurveMove();
             }
-        } 
-    }
-
-    IEnumerator Shoot()
-    {
-        Instantiate(_bullet, this.transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(1);
-        StartCoroutine(Shoot());
-    }
-
-    public void Hit(int damege)
-    {
-        _hp -= damege;
-
-        if (_hp <= 0)
+        }
+        else
         {
-            Destroy(this.gameObject);
+            _enemyManager.enabled = false;
         }
     }
+
+    //IEnumerator Shoot()
+    //{
+    //    Instantiate(_bullet, this.transform.position, Quaternion.identity);
+    //    yield return new WaitForSeconds(1);
+    //    StartCoroutine(Shoot());
+    //}
+
+    //public void Hit(int damege)
+    //{
+    //    _hp -= damege;
+
+    //    if (_hp <= 0)
+    //    {
+    //        Destroy(this.gameObject);
+    //    }
+    //}
 
     void VerticalMove()
     {
@@ -88,22 +93,23 @@ public class Enemy : MonoBehaviour
         this.transform.position += new Vector3(_dir * _horiSpeed, 0, 0);
     }
 
-    void SinCurveMove(float time) 
+    void SinCurveMove() 
     {
         _x = Mathf.Sin(_startTime * _horiSpeed) + _originalX;
         Debug.Log(_x);
-        this.transform.position = new Vector3(_x,transform.position.y, 0);
+        transform.position = new Vector3(_x ,transform.position.y, 0);
         VerticalMove();
     }
 
-    protected void InsideCamera()
+    public bool InsideCamera()
     {
         float y = Camera.main.ViewportToWorldPoint(Vector2.one).y;
-        if (y > transform.position.y) 
+        if (y > transform.position.y && transform.position.y > Camera.main.ViewportToWorldPoint(Vector2.zero).y) 
         {
-            _isInsideCamera = true;
+            return true;
         }
-        
+        return false;
+
     }
 }
 

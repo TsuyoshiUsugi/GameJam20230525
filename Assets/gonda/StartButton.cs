@@ -11,7 +11,7 @@ public class StartButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _StartButton.onClick.AddListener(() => SceneManager.LoadScene(""));
+        _StartButton.onClick.AddListener(() => SceneManager.LoadScene("GameScene"));
         
     }
 

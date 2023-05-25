@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player_Bullet_Manager : MonoBehaviour
 {
     float _speed = 10f;
-    float _lifeTime = 5f;
+    float _lifeTime = 3f;
     void Start()
     {
         // ‰E•ûŒü‚É”ò‚Î‚·
