@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player_Bullet: {fileID: 3519012708562442532, guid: de5899d8d15b93649927b9fd3f974c37, type: 3}
+  _playerHP_Text: {fileID: 0}
 --- !u!50 &9071021860982986098
 Rigidbody2D:
   serializedVersion: 4

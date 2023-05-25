@@ -22,10 +22,18 @@ public class PlayerManager : MonoBehaviour
         _rb2D = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     float _bullet_Time = 0f;
+    float _field_xLimit = 5.5f;
     void Update()
     {
+        //à⁄ìÆêßå¿
+        Vector2 _position_Limit = Camera.main.ViewportToWorldPoint(Vector2.one);
+        _position_Limit -= new Vector2(0.5f, 0.5f);
+        Vector2 currentPos = transform.position;
+        currentPos.x = Mathf.Clamp(currentPos.x, -_position_Limit.x, _position_Limit.x);
+        currentPos.y = Mathf.Clamp(currentPos.y, -_position_Limit.y, _position_Limit.y);
+        transform.position = currentPos;
+
         _playerHP_Text.text = $"PlayerHP: {_playerHP}";
         if (_playerHP <= 0)
         {

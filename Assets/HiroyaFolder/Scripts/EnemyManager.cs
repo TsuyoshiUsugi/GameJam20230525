@@ -15,9 +15,11 @@ public class EnemyManager : MonoBehaviour
         
     }
     float _bullet_Time = 0f;
+
     void Update()
     {
-        if (_enemyHP <= 0)
+
+         if (_enemyHP <= 0)
         {
             Destroy(gameObject);
         }
