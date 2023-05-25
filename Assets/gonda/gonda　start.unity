@@ -609,6 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _StartButton: {fileID: 1988751816}
+  _sceneName: 
 --- !u!1 &801058471
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,7 +1228,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1a11ca1a6d0dac049af12d2c31368c54, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1311,7 +1312,7 @@ SpriteRenderer:
   m_Size: {x: 20.48, y: 7.68}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1630083763
@@ -1322,8 +1323,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1630083761}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0012, y: -0.0006, z: 0}
-  m_LocalScale: {x: 0.98942095, y: 1.3027092, z: 1}
+  m_LocalPosition: {x: 0.0283, y: -0.0596, z: 0}
+  m_LocalScale: {x: 1.0441775, y: 1.3180813, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1721,6 +1722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _StartButton: {fileID: 1988751816}
+  _sceneName: 
 --- !u!1001 &9181430710344562941
 PrefabInstance:
   m_ObjectHideFlags: 0
