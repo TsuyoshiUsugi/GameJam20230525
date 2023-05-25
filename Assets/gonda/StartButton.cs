@@ -8,10 +8,12 @@ using UnityEngine.SceneManagement;
 public class StartButton : MonoBehaviour
 {
     [SerializeField] Button _StartButton;
+    [SerializeField] string _sceneName;
+
     // Start is called before the first frame update
     void Start()
     {
-        _StartButton.onClick.AddListener(() => SceneManager.LoadScene("GameScene"));
+        _StartButton.onClick.AddListener(() => SceneManager.LoadScene(_sceneName));
         
     }
 
