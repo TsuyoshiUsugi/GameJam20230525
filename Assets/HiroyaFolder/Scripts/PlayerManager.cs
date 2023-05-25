@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Rendering.HybridV2;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class PlayerManager : MonoBehaviour
 {
     //[SerializeField]
@@ -15,6 +16,10 @@ public class PlayerManager : MonoBehaviour
     Text _timeText = default;
     [SerializeField]
     Text _scoreText = default;
+    [SerializeField]
+    AudioSource _audioSource = null;
+    [SerializeField]
+    AudioClip _audioClip = null;
     private float _moveSpeed = 8f;
     private int _playerHP = 100;
 
@@ -45,12 +50,13 @@ public class PlayerManager : MonoBehaviour
         
         if (_playerHP <= 0)
         {
-            Destroy(gameObject);
+            SceneManager.LoadScene("ResultScene");
         }
         //’e‚Ì”­ŽËŠÔŠu
         _bullet_Time += Time.deltaTime;
         if (Input.GetKey(KeyCode.Space) && _bullet_Time > 0.2f)
         {
+            _audioSource.PlayOneShot(_audioClip);
             _bullet_Time = 0f;
             Instantiate(_player_Bullet, transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
         }
@@ -81,7 +87,7 @@ public class PlayerManager : MonoBehaviour
         }
         if (other.gameObject.tag == "RepairItem")
         {
-            DamagetoPlayer(-20);
+            DamagetoPlayer(-5);
             Destroy(other.gameObject);
         }
         if (other.gameObject.tag == "ScoreItem")

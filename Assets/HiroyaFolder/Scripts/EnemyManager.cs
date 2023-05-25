@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class EnemyManager : MonoBehaviour
 {
@@ -31,13 +32,16 @@ public class EnemyManager : MonoBehaviour
     Image _bossHPImage = null;
     Boss _boss = null;
     int _enemyHP;
+    AudioSource _audioSource = null;
+    [SerializeField]
+    AudioClip _audioClip = null;
     // Start is called before the first frame update
     void Start()
     {
         _bossHPImage = _bossHPUI.GetComponent<Image>();
         _enemyHP = _enemyMAXHP;
+        _audioSource = GetComponent<AudioSource>();
 
-            
     }
     float _bullet_Time = 0f;
 
@@ -46,6 +50,7 @@ public class EnemyManager : MonoBehaviour
         if (_enemyType == EnemyType.Boss)
         {
             _boss = GetComponent<Boss>();
+
             if (_boss.InsideCamera())
             {
                 _bossHPUI.SetActive(true);
@@ -54,9 +59,16 @@ public class EnemyManager : MonoBehaviour
         }
         if (_enemyHP <= 0)
         {
-           DropItems(_score_Item, _scoreItemCount);
-           DropItems  (_repair_Item, _repairItemCount);
-           Destroy(gameObject);
+            
+            if (_enemyType == EnemyType.Boss)
+            {
+                SceneManager.LoadScene("ResultScene");
+            }
+            _audioSource.PlayOneShot(_audioClip);
+            DropItems(_score_Item, _scoreItemCount);
+            DropItems(_repair_Item, _repairItemCount);
+            Destroy(gameObject);
+
         }
 
         _bullet_Time += Time.deltaTime;

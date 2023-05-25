@@ -5,7 +5,7 @@ using UnityEngine;
 public class Boss : Enemy
 {
     Vector3 _hDir = Vector3.right;
-    Vector3 _vDir = Vector3.up;
+    Vector3 _vDir = Vector3.down;
     float _currentTime = 0;
 
     [SerializeField]
@@ -14,7 +14,7 @@ public class Boss : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -26,9 +26,7 @@ public class Boss : Enemy
 
     protected override void FixedUpdate()
     {
-        InsideCamera();
-
-        if (_isInsideCamera)
+        if (InsideCamera())
         {
             HoriMove();
             VertMove();
@@ -39,11 +37,11 @@ public class Boss : Enemy
     {
         transform.position += _hDir * _horiSpeed;
 
-        if(transform.position.x > Camera.main.ViewportToWorldPoint(Vector2.one).x) 
+        if (transform.position.x > Camera.main.ViewportToWorldPoint(Vector2.one).x - 1f)
         {
             _hDir *= -1;
         }
-        else if(transform.position.x < Camera.main.ViewportToWorldPoint(Vector2.zero).x)
+        else if (transform.position.x < Camera.main.ViewportToWorldPoint(Vector2.zero).x + 1f)
         {
             _hDir *= -1;
         }
@@ -53,11 +51,11 @@ public class Boss : Enemy
     {
         transform.position += _vDir * _vertSpeed;
 
-        if (transform.position.y > Camera.main.ViewportToWorldPoint(Vector2.one).y)
+        if (transform.position.y > Camera.main.ViewportToWorldPoint(Vector2.one).y - 1f)
         {
             _vDir *= -1;
         }
-        else if (transform.position.y < Camera.main.ViewportToWorldPoint(Vector2.zero).y)
+        else if (transform.position.y < Camera.main.ViewportToWorldPoint(Vector2.zero).y + 1f)
         {
             _vDir *= -1;
         }

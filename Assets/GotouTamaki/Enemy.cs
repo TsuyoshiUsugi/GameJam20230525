@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         _originalX = transform.position.x;
         _enemyManager = GetComponent<EnemyManager>();
         //StartCoroutine(Shoot());
@@ -96,7 +97,6 @@ public class Enemy : MonoBehaviour
     void SinCurveMove() 
     {
         _x = Mathf.Sin(_startTime * _horiSpeed) + _originalX;
-        Debug.Log(_x);
         transform.position = new Vector3(_x ,transform.position.y, 0);
         VerticalMove();
     }
