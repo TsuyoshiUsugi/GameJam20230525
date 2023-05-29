@@ -2,6 +2,9 @@
 ## 概要  
 2023年5月25日に行われたバンタンゲームアカデミーの新歓ゲームジャムのリポジトリです。  
 
+## 作品URL  
+https://unityroom.com/games/vantangamejam_libragroup  
+
 ## ルール  
 ・目的がある  
 ・やってはいけないことがある  
