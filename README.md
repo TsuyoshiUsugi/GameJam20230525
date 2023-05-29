@@ -1,6 +1,8 @@
 # GameJam20230525
 ## 概要  
 2023年5月25日に行われたバンタンゲームアカデミーの新歓ゲームジャムのリポジトリです。  
+![DSC_0324](https://github.com/TsuyoshiUsugi/GameJam20230525/assets/104509665/af226d6e-42bc-4fce-9eb2-6cd5a18e51a3)
+
 
 ## 作品URL  
 https://unityroom.com/games/vantangamejam_libragroup  
