@@ -30,7 +30,7 @@ https://unityroom.com/games/vantangamejam_libragroup
 ・薄衣毅  
 
 ## 使用アセット、効果音
-・2D Space Kit
-https://assetstore.unity.com/packages/2d/environments/2d-space-kit-27662?locale=ja-JP
-・魔王魂
-https://maou.audio/
+・2D Space Kit  
+https://assetstore.unity.com/packages/2d/environments/2d-space-kit-27662?locale=ja-JP  
+・魔王魂  
+https://maou.audio/  
