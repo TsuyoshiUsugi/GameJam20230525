@@ -9,5 +9,8 @@ static public class SCORE_MANAGER
     {
         Score += score;
     }
-
+    static public void RemoveScore()
+    {
+        Score = 0;
+    }
 }

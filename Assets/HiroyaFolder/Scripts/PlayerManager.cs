@@ -27,7 +27,9 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         _rb2D = GetComponent<Rigidbody2D>();
+        SCORE_MANAGER.RemoveScore();
     }
 
     float _bullet_Time = 0f;

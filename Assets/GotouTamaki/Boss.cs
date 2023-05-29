@@ -10,11 +10,11 @@ public class Boss : Enemy
 
     [SerializeField]
     float _decreaseSpeedNum = 1f;
-
+    EnemyManager _enemyManager;
     // Start is called before the first frame update
     void Start()
     {
-
+        _enemyManager = GetComponent<EnemyManager>();
     }
 
     // Update is called once per frame
@@ -28,8 +28,13 @@ public class Boss : Enemy
     {
         if (InsideCamera())
         {
+            _enemyManager.enabled = true;
             HoriMove();
             VertMove();
+        }
+        else
+        {
+            _enemyManager.enabled = false;
         }
     }
 

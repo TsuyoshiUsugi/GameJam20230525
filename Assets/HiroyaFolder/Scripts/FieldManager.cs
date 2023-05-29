@@ -15,10 +15,14 @@ public class FieldManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.y > 74f)
+
+    }
+    private void FixedUpdate()
+    {
+        if (transform.position.y > 74f)
         {
             transform.position -= new Vector3(0, _fieldSpeed, 0);
         }
-        
+
     }
 }

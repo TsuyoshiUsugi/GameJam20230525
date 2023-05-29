@@ -302,6 +302,10 @@ PrefabInstance:
       propertyPath: m_Text
       value: "\u30EA\u30B9\u30BF\u30FC\u30C8"
       objectReference: {fileID: 0}
+    - target: {fileID: 2461620989078307291, guid: c52b573db7a612847a57ddb032199f96, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: e545d0d9e2aff354ab04666e94b74fe6, type: 3}
     - target: {fileID: 8043238466604524035, guid: c52b573db7a612847a57ddb032199f96, type: 3}
       propertyPath: m_Name
       value: Button (Legacy)
@@ -379,8 +383,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7, y: 102}
-  m_SizeDelta: {x: 321.2036, y: 63.539}
+  m_AnchoredPosition: {x: 1.2062, y: 85.5878}
+  m_SizeDelta: {x: 422.412, y: 96.3633}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &886525639
 MonoBehaviour:
@@ -416,7 +420,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: e545d0d9e2aff354ab04666e94b74fe6, type: 3}
     m_FontSize: 54
     m_FontStyle: 0
     m_BestFit: 0
@@ -788,6 +792,10 @@ PrefabInstance:
       propertyPath: m_Text
       value: "\u30BF\u30A4\u30C8\u30EB"
       objectReference: {fileID: 0}
+    - target: {fileID: 2461620989078307291, guid: c52b573db7a612847a57ddb032199f96, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: e545d0d9e2aff354ab04666e94b74fe6, type: 3}
     - target: {fileID: 8043238466604524035, guid: c52b573db7a612847a57ddb032199f96, type: 3}
       propertyPath: m_Name
       value: Button (Legacy)
