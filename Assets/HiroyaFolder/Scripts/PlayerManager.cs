@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour
     {
 
         _rb2D = GetComponent<Rigidbody2D>();
-        SCORE_MANAGER.RemoveScore();
+        ScoreManager.RemoveScore();
     }
 
     float _bullet_Time = 0f;
@@ -39,7 +39,7 @@ public class PlayerManager : MonoBehaviour
         //UIï\é¶
         _elaptime += Time.deltaTime;
         _timeText.text = $"{((int)_elaptime / 60).ToString("00")}:{((_elaptime % 60).ToString("00.00"))}";
-        _scoreText.text = $"Score: {SCORE_MANAGER.Score.ToString()}";
+        _scoreText.text = $"Score: {ScoreManager.Score.ToString()}";
         _playerHP_Text.text = $"HP: {_playerHP}";
         //à⁄ìÆêßå¿
         Vector2 _position_Limit = Camera.main.ViewportToWorldPoint(Vector2.one);
@@ -85,7 +85,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (other.gameObject.tag == "EnemyBullet")
         {
-            SCORE_MANAGER.AddScore(10);
+            ScoreManager.AddScore(10);
         }
         if (other.gameObject.tag == "RepairItem")
         {
@@ -94,7 +94,7 @@ public class PlayerManager : MonoBehaviour
         }
         if (other.gameObject.tag == "ScoreItem")
         {
-            SCORE_MANAGER.AddScore(100);
+            ScoreManager.AddScore(100);
             Destroy(other.gameObject);
         }
     }

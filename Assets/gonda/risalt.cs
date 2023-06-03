@@ -9,7 +9,7 @@ public class risalt : MonoBehaviour
     [SerializeField] Text ScoreText;
     void Start()
     {
-        ScoreText.text = "スコア" + SCORE_MANAGER.Score.ToString();
+        ScoreText.text = "スコア" + ScoreManager.Score.ToString();
         
         
     }
